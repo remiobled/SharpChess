@@ -25,7 +25,9 @@ namespace ChessEngine
                 new PiecePosition((char)(position.Column + 1), position.Line - 1),
                 new PiecePosition((char)(position.Column + 1), position.Line),
                 new PiecePosition((char)(position.Column + 1), position.Line + 1)
-            }.Where(x => IsInBoard(x) && !IsOccupiedBySameColorPiece(board, x)).ToList();
+            }
+            .Where(x => IsInBoard(x) && !IsOccupiedBySameColorPiece(board, x) && !board.IsPositionThreatened(x, Color))
+            .ToList();
         }
 
         internal override List<PiecePosition> GetPossiblePiecePositions(PiecePosition position, Board board)
@@ -44,7 +46,7 @@ namespace ChessEngine
         }
 
 
-        public bool CanBigRoque(Board board)
+        private bool CanBigRoque(Board board)
         {
             if (HasMoved)
             {
@@ -66,7 +68,7 @@ namespace ChessEngine
             return true;
         }
 
-        public bool CanSmallRoque(Board board)
+        private bool CanSmallRoque(Board board)
         {
             if (HasMoved)
             {
