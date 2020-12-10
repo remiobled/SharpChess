@@ -6,6 +6,11 @@ namespace ChessConsole
 {
     public static class BoardRenderer
     {
+        static BoardRenderer()
+        {
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+        }
+
         public static void RenderBoard(Board board, List<PiecePosition> highlightedPositions = null)
         {
             for (int l = 8; l >= 1; l--)
